@@ -1,24 +1,41 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
-import Home from './routes/Home';
-import Facts from './routes/Facts';
-import Details from './routes/Details';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import styles from './App.module.css';
+import Home from './routes/Home/Home';
+import Facts from './routes/Facts/Facts';
+import Details from './routes/Details/Details';
 
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/facts">Facts</Link></li>
+      <nav className={styles.nav}>
+        <ul className={styles.ul}>
+          <li className={styles.li}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? styles.active : undefined
+              }
+            >
+              Home
+            </NavLink>
+          </li>
+          <li className={styles.li}>
+            <NavLink
+              to="/facts"
+              className={({ isActive }) =>
+                isActive ? styles.active : undefined
+              }
+            >
+              Facts
+            </NavLink>
+          </li>
         </ul>
       </nav>
       <Routes>
-        <Route path='/' Component={Home} />
-        <Route path='/facts' Component={Facts} />
-        <Route path='/details/:id' Component={Details} />
+        <Route path="/" Component={Home} />
+        <Route path="/facts" Component={Facts} />
+        <Route path="/details/:id" Component={Details} />
       </Routes>
-
     </BrowserRouter>
   );
 }
